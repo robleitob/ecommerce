@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 class Carrito{
 
     constructor(){
@@ -21,6 +23,7 @@ class Carrito{
         try {
             //TODOS : Solo recibir el id del producto, con el cual llamar a listarPorId de Productos y eso pasarselo al carrito
             this.carrito.push({id:this.id++,timestamp:new Date().toISOString(),productos: {...obj}});
+            fs.writeFileSync('./src/assets/carrito.txt', JSON.stringify(this.carrito, null, '\t'));
             return this.carrito;    
         } catch (error) {
             return [{

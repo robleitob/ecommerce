@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 class Productos{
     constructor(){
         this.productos = [];
@@ -17,8 +19,10 @@ class Productos{
     }
 
     guardarProd(obj){
+        //TODO: leer los registros desde el filesystem
         try {
             this.productos.push({id:this.id++,timestamp:new Date().toISOString(), ...obj});
+            fs.writeFileSync('./src/assets/productos.txt', JSON.stringify(this.productos, null, '\t'));
             return this.productos;    
         } catch (error) {
             return [{
